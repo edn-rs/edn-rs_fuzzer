@@ -10,13 +10,13 @@
 (defn -main
   [& args]
   (init!)
-  (dotimes [_ 10]
+  (dotimes [_ 1000]
     (let [edn (pr-str (cgen/ednable))
           ; edn-rs doesn't preserve order on hashmaps or sets. For now we just use clojure's
           ; read-string to make sure the round trip is valid edn.
-          edn-rs (-> (Rust/roundtrip edn) cljedn/read-string pr-str)] 
+          edn-rs (-> (Rust/roundtrip edn) cljedn/read-string)
+          edn (cljedn/read-string edn)]
       (when-not (= edn edn-rs)
-        (prn edn)
+        (prn (pr-str edn))
         (println "")
-        (prn edn-rs)))))
-
+        (prn (pr-str edn-rs))))))
