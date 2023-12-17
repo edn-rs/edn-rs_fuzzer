@@ -19,4 +19,5 @@
       (when-not (= edn edn-rs)
         (prn (pr-str edn))
         (println "")
-        (prn (pr-str edn-rs))))))
+        (prn (pr-str edn-rs)))))
+  (println "All done!"))
